@@ -1,0 +1,117 @@
+;
+; BT USB filter driver x64 INF
+;
+; Copyright (c) 2008 Broadcom Corp.
+;
+
+[Version]
+Signature="$CHICAGO$"
+Class=Bluetooth
+CLASSGUID={e0cbf06c-cd8b-4647-bb8a-263b43f0f974}
+CatalogFile=btwsecfl64.cat
+Provider=%WDCM%
+DriverVer=06/24/2009,6.2.0.9451
+
+[SourceDisksNames]
+1 = %DISK_1%,,,
+
+[SourceDisksFiles]
+btwsecfl.sys = 1
+
+[Manufacturer]
+%MfgName%=WIDCOMM, NTamd64...1
+
+[WIDCOMM.NTamd64...1]
+%UsbDell365.DeviceDesc% =BTWSECFL, USB\Vid_413c&Pid_8167 ; Dell Wireless 365 Secure Bluetooth Module
+%UsbDell370.DeviceDesc% =Win7BTWSECFL, USB\Vid_413c&Pid_8168 ; Dell Wireless 370 Secure Bluetooth Mini-card
+%UsbDell410.DeviceDesc% =BTWSECFL, USB\Vid_413c&Pid_8169 ; Dell Wireless 410 Secure Bluetooth&UWB Mini-card
+%UsbDell191.DeviceDesc% =BTWSECFL, USB\Vid_413c&Pid_8170 ; Dell 19 in 1 Media Card Reader with Secure Bluetooth Module 
+%UsbDell367.DeviceDesc% =BTWSECFL, USB\Vid_413c&Pid_8177 ; Dell Wireless 367 Secure Bluetooth Module
+
+%UsbBrcm.DeviceDesc% =BTWSECFL, USB\Vid_0a5c&Pid_2171 ; 2070 none UHE Secure
+%UsbBrcm.DeviceDesc% =BTWSECFL, USB\Vid_0a5c&Pid_2172 ; 2070 none UHE Secure
+%UsbBrcm.DeviceDesc% =BTWSECFL, USB\Vid_0a5c&Pid_8170 ; BlackRock Test Dongle
+%UsbBrcm.DeviceDesc% =BTWSECFL, USB\Vid_0a5c&Pid_2185 ; 2070 Generic
+
+[DestinationDirs]
+BTWSECFL.CopyList=10,system32\drivers
+
+[BTWSECFL.CopyList]
+btwsecfl.sys
+
+[BTWSECFL.NTamd64]
+Include=bth.inf
+Needs=BthUsb.NT
+CopyFiles=BTWSECFL.CopyList
+
+[BTWSECFL.NTamd64.hw]
+AddReg=BTWSECFL.NTamd64.hw.reg
+
+[BTWSECFL.NTamd64.hw.reg]
+HKR, ,LowerFilters, 0x00010000, "btwsecfl"
+
+; To enable remote wakeup, the system wide wakeup must also be enabled via the 
+; "Services\Bthport\Parameters","SystemRemoteWakeSupported",0x00010001,0x00000001
+;
+HKR,,%RemoteWakeEnabled%,0x00010001,1
+HKR,,%DeviceRemoteWakeSupported%,0x00010001,1
+
+[BTWSECFL.NTamd64.Services]
+Addservice = BTHUSB, 0x00000002, BthUsb_Service_Inst, BthUsb_EventLog_Inst
+Addservice = BTHPORT, , BthPort_Service_Inst, BthPort_EventLog_Inst
+AddService=btwsecfl,,BTWSECFL_Service_Inst, BTWSECFL_EventLog_Inst
+
+[BTWSECFL_Service_Inst]
+DisplayName=%BTWSECFL.SvcDesc%
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%10%\system32\drivers\btwsecfl.sys
+LoadOrderGroup = PNP Filter
+
+[BTWSECFL_EventLog_Inst]
+AddReg = BTWSECFL_EventLog_Inst.reg
+
+[BTWSECFL_EventLog_Inst.reg]
+HKR,,EventMessageFile,0x00020000,"%%SystemRoot%%\System32\IoLogMsg.dll;%%SystemRoot%%\System32\drivers\btwsecfl.sys"
+HKR,,TypesSupported,0x00010001,7
+
+
+[Win7BTWSECFL.NTamd64]
+Include=bth.inf
+Needs=BthUsb.NT
+CopyFiles=BTWSECFL.CopyList
+
+[Win7BTWSECFL.NTamd64.hw]
+AddReg=Win7BTWSECFL.NTamd64.hw.reg
+
+[Win7BTWSECFL.NTamd64.hw.reg]
+HKR, ,LowerFilters, 0x00010000, "btwsecfl"
+HKR,,"RemovableOverride",0x10001,1
+
+; To enable remote wakeup, the system wide wakeup must also be enabled via the 
+; "Services\Bthport\Parameters","SystemRemoteWakeSupported",0x00010001,0x00000001
+;
+HKR,,%RemoteWakeEnabled%,0x00010001,1
+HKR,,%DeviceRemoteWakeSupported%,0x00010001,1
+
+[Win7BTWSECFL.NTamd64.Services]
+Addservice = BTHUSB, 0x00000002, BthUsb_Service_Inst, BthUsb_EventLog_Inst
+Addservice = BTHPORT, , BthPort_Service_Inst, BthPort_EventLog_Inst
+AddService=btwsecfl,,BTWSECFL_Service_Inst, BTWSECFL_EventLog_Inst
+
+
+[Strings]
+UsbDell365.DeviceDesc ="Dell Wireless 365 Secure Bluetooth Module"
+UsbDell370.DeviceDesc ="Dell Wireless 370 Secure Bluetooth Mini-card"
+UsbDell410.DeviceDesc ="Dell Wireless 410 Secure Bluetooth&UWB Mini-card"
+UsbDell367.DeviceDesc ="Dell Wireless 367 Secure Bluetooth Module"
+UsbDell191.DeviceDesc ="Dell 19 in 1 Media Card Reader with Secure Bluetooth Module"
+UsbBrcm.DeviceDesc ="Broadcom Secure Bluetooth Device"
+
+WDCM="Broadcom Corporation"
+MfgName="Broadcom"
+BTWSECFL.SvcDesc="Bluetooth USB Security Filter"
+DISK_1="WIDCOMM Installation Media"
+DeviceRemoteWakeSupported = "DeviceRemoteWakeSupported"
+RemoteWakeEnabled = "RemoteWakeEnabled"
