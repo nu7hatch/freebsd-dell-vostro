@@ -1,4 +1,4 @@
-= FreeBSD configuration for Dell Vostro 3300 with intel i5/450 processor. 
+= FreeBSD configuration for Dell Vostro 3300 with Intel i5/450 (amd64). 
 
 It contains almost all devices installation scripts and configuration, 
 dedicated kernel configuration, and fluxbox desktop settings.

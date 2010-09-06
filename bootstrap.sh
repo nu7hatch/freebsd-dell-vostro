@@ -63,8 +63,8 @@ portinstall irssi
 portinstall mplayer
 
 # Configure everything...
-fetch http://gihub.com/nu7hatch/freebsd-dell-vostro/blob/etc/X11/xorg.conf -o /etc/X11/xorg.conf
-fetch http://gihub.com/nu7hatch/freebsd-dell-vostro/blob/etc/rc.conf -o /etc/rc.conf
-fetch http://gihub.com/nu7hatch/freebsd-dell-vostro/blob/boot/loader.conf -o /boot/loader.conf
+fetch http://gihub.com/nu7hatch/freebsd-dell-vostro/raw/etc/X11/xorg.conf -o /etc/X11/xorg.conf
+fetch http://gihub.com/nu7hatch/freebsd-dell-vostro/raw/etc/rc.conf -o /etc/rc.conf
+fetch http://gihub.com/nu7hatch/freebsd-dell-vostro/raw/boot/loader.conf -o /boot/loader.conf
 
 

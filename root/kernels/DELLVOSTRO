@@ -48,8 +48,8 @@ options 	MD_ROOT			# MD is a potential root device
 #options 	NFS_ROOT		# NFS usable as /, requires NFSCLIENT
 #options 	MSDOSFS			# MSDOS Filesystem
 options 	CD9660			# ISO 9660 Filesystem
-#options 	PROCFS			# Process filesystem (requires PSEUDOFS)
-#options 	PSEUDOFS		# Pseudo-filesystem framework
+options 	PROCFS			# Process filesystem (requires PSEUDOFS)
+options 	PSEUDOFS		# Pseudo-filesystem framework
 options 	GEOM_PART_GPT		# GUID Partition Tables.
 options 	GEOM_LABEL		# Provides labelization
 options 	COMPAT_43TTY		# BSD 4.3 TTY compat (sgtty)
@@ -72,8 +72,8 @@ options 	HWPMC_HOOKS		# Necessary kernel hooks for hwpmc(4)
 #options 	AUDIT			# Security event auditing
 #options 	MAC			# TrustedBSD MAC Framework
 options 	FLOWTABLE		# per-cpu routing cache
-#options 	KDTRACE_FRAME		# Ensure frames are compiled in
-#options 	KDTRACE_HOOKS		# Kernel DTrace hooks
+options 	KDTRACE_FRAME		# Ensure frames are compiled in
+options 	KDTRACE_HOOKS		# Kernel DTrace hooks
 options 	INCLUDE_CONFIG_FILE     # Include this file in kernel
 
 # Make an SMP-capable kernel by default
